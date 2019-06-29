@@ -13,8 +13,22 @@ export interface TextContent extends ContentBase {
     color?: string,
 }
 
+export interface Separator extends ContentBase {
+    type: string;
+}
+
+type BoxJson = {
+    type: string;
+    layout: string;
+    contents: any[];
+    flex?: number;
+    spacing?: string;
+    margin?: string;
+    action?: any;
+}
+
 export class Box {
-    json:any;
+    json:BoxJson;
 
     constructor(boxLayout: BoxLayout) {
         this.json = {
@@ -24,7 +38,7 @@ export class Box {
         };
     }
 
-    public addContent(content: TextContent): this {
+    public addContent(content: Box | TextContent): this {
         this.json['contents'].push(content);
         return this;
     }
@@ -34,8 +48,18 @@ interface ContainerBase {
     json: any
 }
 
-export class BubbleConteiner implements ContainerBase {
-    public json: any;
+type BubbleJson = {
+    type: string;
+    direction?: string;
+    header?: object;
+    hero?: object;
+    body?: object;
+    footer?: object;
+    styles?: object;
+}
+
+export class BubbleContainer implements ContainerBase {
+    public json: BubbleJson;
     constructor() {
         this.json = {
             type: 'bubble'
@@ -58,10 +82,31 @@ export class BubbleConteiner implements ContainerBase {
     public setFooterBlock() {
         //TODO
     }
+
+    public setStyles() {
+        //TODO
+    }
 }
 
-class CarouselContainer implements ContainerBase {
-    public json: any;
+type CaroucelJson = {
+    type: string;
+    contents: BubbleJson[];
+}
+
+export class CarouselContainer implements ContainerBase {
+    public json: CaroucelJson;
+
+    constructor() {
+        this.json = {
+            type: 'carousel',
+            contents:[]
+        }
+    }
+
+    public pushBubble(bubble: BubbleContainer): this {
+        this.json['contents'].push(bubble.json);
+        return this;
+    }
 }
 
 class Helper {
@@ -75,7 +120,7 @@ class Helper {
         return JSON.stringify(this.json);
     }
 
-    public setContainerType(container: BubbleConteiner | CarouselContainer): this {
+    public setContainerType(container: BubbleContainer | CarouselContainer): this {
         this.json = container.json;
         return this;
     }
