@@ -13,9 +13,14 @@ export interface TextContent extends ContentBase {
     color?: string,
 }
 
+export interface ImageContent extends ContentBase {
+    // TODO
+}
+
 export interface Separator extends ContentBase {
     type: string;
 }
+
 
 type BoxJson = {
     type: string;
@@ -66,8 +71,9 @@ export class BubbleContainer implements ContainerBase {
         }
     }
 
-    public setHeaderBlock() {
-        // TODO
+    public setHeaderBlock(box: Box) {
+       this.json['header'] = box.json;
+       return this;
     }
 
     public setHeroBlock() {
@@ -79,8 +85,9 @@ export class BubbleContainer implements ContainerBase {
         return this;
     }
 
-    public setFooterBlock() {
-        //TODO
+    public setFooterBlock(box: Box) : this {
+        this.json['footer'] = box.json;
+        return this;
     }
 
     public setStyles() {
