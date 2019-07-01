@@ -21,6 +21,28 @@ export interface Separator extends ContentBase {
     type: string;
 }
 
+type ButtonJson = {
+    type: string;
+    action: object;
+    flex?: number;
+    margin?: string;
+    height?: string;
+    style?: string;
+    color?: string;
+    gravity?: string;
+}
+
+
+export class Button {
+    json: ButtonJson;
+
+    constructor() {
+        this.json = {
+            type: 'button',
+            action: {}
+        }
+    }
+}
 
 type BoxJson = {
     type: string;
