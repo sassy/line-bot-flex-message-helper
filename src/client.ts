@@ -2,23 +2,29 @@ export type ContainerType = 'bubble' | 'carousel';
 export type BoxLayout = 'horizontal' | 'vertical' | 'baseline';
 
 
-interface ContentBase {
+type TextJSON = {
     type: string;
-}
-
-export interface TextContent extends ContentBase {
     text: string,
+    flex?: string,
+    margin?: string,
     size?: string,
     align?: string,
+    gravity?: string,
+    wrap?: boolean,
+    maxLines?: number,
+    weight?: string,
     color?: string,
 }
 
-export interface ImageContent extends ContentBase {
-    // TODO
-}
+export class TextContent {
+    json: TextJSON;
 
-export interface Separator extends ContentBase {
-    type: string;
+    constructor(text: string) {
+        this.json = {
+            type: 'text',
+            text: text
+        }
+    }
 }
 
 type ButtonJson = {
@@ -66,7 +72,7 @@ export class Box {
     }
 
     public addContent(content: Box | TextContent): this {
-        this.json['contents'].push(content);
+        this.json['contents'].push(content.json);
         return this;
     }
 }

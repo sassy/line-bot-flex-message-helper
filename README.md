@@ -3,10 +3,7 @@ line-bot-flex-message-helper
 example
 ```
         const container = new BubbleConteiner();
-        const textBox = new Box('vertical').addContent({
-            type: 'text',
-            text: 'Hello,World'
-        });
+        const textBox = new Box('vertical').addContent(new TextContent('Hello,World'));
         container.setBodyBlock(textBox)
 
         const ret = Client.Helper().setContainerType(container).dump();
