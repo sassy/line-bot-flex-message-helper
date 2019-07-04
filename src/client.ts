@@ -1,3 +1,5 @@
+import { Action } from './action';
+
 export type ContainerType = 'bubble' | 'carousel';
 export type BoxLayout = 'horizontal' | 'vertical' | 'baseline';
 
@@ -14,6 +16,7 @@ type TextJSON = {
     maxLines?: number,
     weight?: string,
     color?: string,
+    action?: Action,
 }
 
 export class TextContent {
@@ -25,11 +28,43 @@ export class TextContent {
             text: text
         }
     }
+    set flex(flex:string) {
+        this.json['flex'] = flex;
+    }
+    set margin(margin:string) {
+        this.json['margin'] = margin;
+    }
+    set size(size:string) {
+        this.json['size'] = size;
+    }
+    set align(align:string) {
+        this.json['align'] = align;
+    }
+    set gravity(gravity:string) {
+        this.json['gravity'] = gravity;
+    }
+    set wrap(wrap:boolean) {
+        this.json['wrap'] = wrap;
+    }
+    set maxLines(maxLines:number) {
+        this.json['maxLines'] = maxLines;
+    }
+    set weight(weight:string) {
+        this.json['weight'] = weight;
+    }
+    set color(color:string) {
+        this.json['color'] = color;
+    }
+    set action(action:Action) {
+        this.json['action'] = action;
+    }
 }
+
+
 
 type ButtonJson = {
     type: string;
-    action: object;
+    action: Action;
     flex?: number;
     margin?: string;
     height?: string;
@@ -42,10 +77,10 @@ type ButtonJson = {
 export class Button {
     json: ButtonJson;
 
-    constructor() {
+    constructor(action: Action) {
         this.json = {
             type: 'button',
-            action: {}
+            action: action
         }
     }
 }

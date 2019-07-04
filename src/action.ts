@@ -1,3 +1,5 @@
+export type Action = PostbackAction | MessageAction | URIAction | CameraAction | CameraRollAction | LocationAction;
+
 type PostbackJson = {
     type: string;
     label: string;
