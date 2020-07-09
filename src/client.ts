@@ -61,7 +61,6 @@ export class TextContent {
 }
 
 
-
 type ButtonJson = {
     type: string;
     action: Action;
