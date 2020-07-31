@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "26.0.7",
+    "@types/jest": "26.0.8",
     "jest": "26.2.2",
     "ts-jest": "26.1.4",
     "ts-loader": "8.0.1",
